@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Icône originale : un bac de tri avec une feuille. Zone sûre : cercle de 66 dp centré. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Couvercle -->
+    <path
+        android:fillColor="#2E7D4F"
+        android:pathData="M36,38h36a3,3 0,0 1,3 3v2a1,1 0,0 1,-1 1H34a1,1 0,0 1,-1 -1v-2a3,3 0,0 1,3 -3z" />
+    <path
+        android:fillColor="#2E7D4F"
+        android:pathData="M48,33h12a2,2 0,0 1,2 2v3H46v-3a2,2 0,0 1,2 -2z" />
+    <!-- Cuve -->
+    <path
+        android:fillColor="#2E7D4F"
+        android:pathData="M36,47h36l-3.5,28a4,4 0,0 1,-4 3.5H43.5a4,4 0,0 1,-4 -3.5z" />
+    <!-- Feuille -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M63,52c-9,0 -16,5 -16,13c0,2 0.5,3.5 1.2,4.8C50,62 55,58 60,56c-4,3 -8,8 -10,14.5c1.3,0.7 2.8,1 4.3,1C62,71.5 64,62 63,52z" />
+</vector>

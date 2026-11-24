@@ -1,0 +1,5 @@
+# gcloud builds submit --config backend/cloudbuild.yaml .   (depuis la racine du projet)
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "-f", "backend/Dockerfile", "-t", "gcr.io/$PROJECT_ID/waste-sorter-backend", "."]
+images: ["gcr.io/$PROJECT_ID/waste-sorter-backend"]

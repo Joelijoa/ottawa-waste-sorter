@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Ottawa Waste Sorter</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_history">History</string>
+    <string name="nav_guide">Sorting guide</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Actions -->
+    <string name="action_back">Back</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_done">Done</string>
+    <string name="action_retry">Retry</string>
+    <string name="action_save">Save</string>
+
+    <!-- Home -->
+    <string name="home_tagline">Snap an item, find the right bin in Ottawa.</string>
+    <string name="home_take_photo">Take a photo</string>
+    <string name="home_upload_photo">Upload a photo</string>
+    <string name="home_manual">Sort manually</string>
+    <string name="home_guide">Sorting guide</string>
+    <string name="home_recent">Recent items</string>
+
+    <!-- Camera -->
+    <string name="camera_permission">Camera access is needed to photograph an item. You can also upload a photo or sort the item manually.</string>
+    <string name="camera_grant">Allow camera</string>
+    <string name="camera_capture">Take photo</string>
+    <string name="camera_error">The camera could not be started.</string>
+
+    <!-- Preview -->
+    <string name="preview_title">Check your photo</string>
+    <string name="preview_retake">Retake</string>
+    <string name="preview_identify">Identify</string>
+    <string name="preview_analyzing">Identifying the item…</string>
+
+    <!-- Manual -->
+    <string name="manual_title">Sort manually</string>
+    <string name="manual_item_name">Item name (optional)</string>
+    <string name="manual_object_type">Type of item</string>
+    <string name="manual_search">Search a material or an item (e.g. Pringles, yogurt)</string>
+    <string name="manual_part">Part %1$d</string>
+    <string name="manual_material">Material</string>
+    <string name="manual_condition">Condition</string>
+    <string name="manual_no_match">No material matches your search.</string>
+    <string name="manual_add_part">Add another part</string>
+    <string name="manual_classify">Show where it goes</string>
+
+    <!-- Result -->
+    <string name="result_title">Where does it go?</string>
+    <string name="result_none">No result to display.</string>
+    <string name="result_method_ai_confidence">Identified by AI · %1$d%% confidence</string>
+    <string name="result_verify_notice">Part of this result could not be verified against official Ottawa rules. Check before disposing of it.</string>
+    <string name="result_component_verify">To be verified: this instruction is not confirmed by the official sources.</string>
+    <string name="result_source">Official source</string>
+    <string name="result_check_city">Check on ottawa.ca</string>
+    <string name="result_refine">Specify the material</string>
+    <string name="result_rules_version">Rules: %1$s</string>
+    <string name="method_ai">Identified by AI</string>
+    <string name="method_manual">Sorted manually</string>
+
+    <!-- Destinations -->
+    <string name="dest_blue">Blue bin — containers</string>
+    <string name="dest_blue_desc">Glass, metal, plastic, foam and paper-laminate containers</string>
+    <string name="dest_black">Black bin — paper and fibre</string>
+    <string name="dest_black_desc">Clean paper, boxboard and cardboard</string>
+    <string name="dest_green">Green bin — organics</string>
+    <string name="dest_green_desc">Food waste and food-soiled paper</string>
+    <string name="dest_garbage">Garbage (black bag)</string>
+    <string name="dest_garbage_desc">Household waste that cannot be recycled or composted</string>
+    <string name="dest_special">Special drop-off</string>
+    <string name="dest_special_desc">Hazardous waste, batteries, donations</string>
+    <string name="dest_verify">To be verified</string>
+    <string name="dest_verify_desc">No verified rule: check with the City</string>
+
+    <!-- Materials -->
+    <string name="mat_paper">Paper</string>
+    <string name="mat_paperboard">Boxboard (thin cardboard)</string>
+    <string name="mat_corrugated">Corrugated cardboard</string>
+    <string name="mat_laminate_container">Paper cup or spiral can</string>
+    <string name="mat_laminate_packaging">Laminated paper bag</string>
+    <string name="mat_carton">Milk or juice carton</string>
+    <string name="mat_rigid_plastic">Rigid plastic</string>
+    <string name="mat_flexible_plastic">Flexible plastic</string>
+    <string name="mat_foam">Foam</string>
+    <string name="mat_metal">Metal</string>
+    <string name="mat_foil">Aluminum foil</string>
+    <string name="mat_glass">Glass</string>
+    <string name="mat_food">Food waste</string>
+    <string name="mat_ceramic">Ceramic</string>
+    <string name="mat_textile">Textile</string>
+    <string name="mat_hazardous">Hazardous (batteries, paint…)</string>
+    <string name="mat_mixed">Mixed materials</string>
+    <string name="mat_other">Other</string>
+    <string name="mat_unknown">Unknown</string>
+
+    <!-- Conditions -->
+    <string name="cond_clean">Clean and empty</string>
+    <string name="cond_dirty">Dirty</string>
+    <string name="cond_food">Food residue</string>
+    <string name="cond_wet">Wet</string>
+    <string name="cond_unknown">Unknown</string>
+
+    <!-- Object types -->
+    <string name="type_food">Food packaging</string>
+    <string name="type_beverage">Beverage packaging</string>
+    <string name="type_delivery">Delivery packaging</string>
+    <string name="type_household">Household packaging</string>
+    <string name="type_personal_care">Personal care packaging</string>
+    <string name="type_printed">Printed paper</string>
+    <string name="type_food_scraps">Food scraps</string>
+    <string name="type_other">Other</string>
+
+    <!-- History -->
+    <string name="history_search">Search history</string>
+    <string name="history_empty">No items yet. Your identifications will appear here.</string>
+    <string name="history_no_match">No matching items.</string>
+    <string name="history_clear">Clear history</string>
+    <string name="history_clear_confirm">Delete all saved items and thumbnails? This cannot be undone.</string>
+
+    <!-- Guide -->
+    <string name="guide_search">Search an item</string>
+    <string name="guide_intro">Ottawa curbside collection, 2026 program. Recycling (blue and black bins) is managed by Circular Materials; the City manages the green bin and garbage.</string>
+    <string name="guide_garbage_general">General household waste that cannot be recycled or composted. Do not confuse the black garbage bag with the black recycling bin.</string>
+
+    <!-- Errors -->
+    <string name="error_not_configured">Photo identification is not set up yet. Enter the server address in Settings, or sort the item manually.</string>
+    <string name="error_network">No connection to the server. Check your internet connection and try again, or sort the item manually.</string>
+    <string name="error_rate_limited">Too many requests. Please wait a minute and try again.</string>
+    <string name="error_invalid_image">This image could not be read. Take another photo.</string>
+    <string name="error_ai_unavailable">The identification service is temporarily unavailable. Try again or sort the item manually.</string>
+    <string name="error_server">The server returned an error. Try again later.</string>
+
+    <!-- Settings -->
+    <string name="settings_language">Language</string>
+    <string name="settings_lang_system">Device language</string>
+    <string name="settings_lang_en" translatable="false">English</string>
+    <string name="settings_lang_fr" translatable="false">Français</string>
+    <string name="settings_server">Identification server</string>
+    <string name="settings_server_help">Address of your Ottawa Waste Sorter backend (Google Cloud Run). The sorting guide and manual sorting work without it.</string>
+    <string name="settings_server_url">Server address</string>
+    <string name="settings_saved">Saved.</string>
+    <string name="settings_test">Test connection</string>
+    <string name="settings_test_ok">Connected. Rules %1$s, AI ready.</string>
+    <string name="settings_test_no_ai">Connected (rules %1$s), but the AI key is not configured on the server.</string>
+    <string name="settings_thumbnails">Keep thumbnails in history</string>
+    <string name="settings_thumbnails_help">Small images stored on this device only.</string>
+    <string name="settings_privacy">Photos are compressed, sent to the server for analysis and are not kept after processing. No account is required.</string>
+    <string name="settings_about">About</string>
+    <string name="settings_about_text">Version %1$s · Rules %2$s. Always follow the official instructions of the City of Ottawa and Circular Materials.</string>
+    <string name="settings_src_city">City of Ottawa — Garbage and recycling</string>
+    <string name="settings_src_circular">Circular Materials — Ottawa</string>
+</resources>
