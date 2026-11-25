@@ -48,7 +48,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import android.content.Intent
+import android.provider.Settings
+import androidx.compose.material3.OutlinedButton
 import com.ottawa.wastesorter.R
 import java.io.File
 
@@ -66,6 +71,10 @@ fun CameraScreen(onPhotoCaptured: (Uri) -> Unit, onBack: () -> Unit) {
     }
     LaunchedEffect(Unit) {
         if (!hasPermission) launcher.launch(Manifest.permission.CAMERA)
+    }
+    // Retour des réglages Android : on revérifie l'autorisation.
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
+        hasPermission = ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
     }
 
     Box(Modifier.fillMaxSize().background(Color.Black)) {
@@ -85,6 +94,15 @@ fun CameraScreen(onPhotoCaptured: (Uri) -> Unit, onBack: () -> Unit) {
                 if (askedOnce) {
                     Button(onClick = { launcher.launch(Manifest.permission.CAMERA) }) {
                         Text(stringResource(R.string.camera_grant))
+                    }
+                    // Si l'autorisation a été refusée définitivement, Android n'affiche plus la demande.
+                    OutlinedButton(onClick = {
+                        context.startActivity(
+                            Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, android.net.Uri.fromParts("package", context.packageName, null))
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+                        )
+                    }) {
+                        Text(stringResource(R.string.camera_open_settings), color = Color.White)
                     }
                 }
             }

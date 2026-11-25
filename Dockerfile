@@ -1,6 +1,7 @@
 # Image du backend pour Google Cloud Run.
-# À construire depuis la RACINE du projet (le backend dépend du module :rules) :
-#   docker build -f backend/Dockerfile -t waste-sorter-backend .
+# À la racine du projet car le backend dépend du module :rules.
+# Utilisé automatiquement par : gcloud run deploy --source .
+# Construction locale :         docker build -t waste-sorter-backend .
 FROM gradle:8.11.1-jdk17 AS build
 WORKDIR /src
 COPY . .

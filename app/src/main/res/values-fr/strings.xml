@@ -26,6 +26,7 @@
     <string name="camera_permission">L\'accès à la caméra est nécessaire pour photographier un objet. Vous pouvez aussi importer une photo ou trier l\'objet manuellement.</string>
     <string name="camera_grant">Autoriser la caméra</string>
     <string name="camera_capture">Prendre la photo</string>
+    <string name="camera_open_settings">Ouvrir les réglages de l\'appli</string>
     <string name="camera_error">Impossible de démarrer la caméra.</string>
 
     <!-- Aperçu -->

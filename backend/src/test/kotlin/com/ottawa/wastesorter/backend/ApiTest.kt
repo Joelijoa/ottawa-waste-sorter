@@ -120,6 +120,12 @@ class ApiTest {
         assertTrue(result.needsUserInput)
     }
 
+    @Test fun `rate limit key uses the address appended by the proxy`() {
+        assertEquals("203.0.113.7", clientKey("1.2.3.4, 203.0.113.7", "10.0.0.1"))
+        assertEquals("203.0.113.7", clientKey("203.0.113.7", "10.0.0.1"))
+        assertEquals("10.0.0.1", clientKey(null, "10.0.0.1"))
+    }
+
     // ── Validation des réponses de l'IA ──
 
     @Test fun `valid AI JSON is parsed`() {

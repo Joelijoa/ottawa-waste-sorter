@@ -52,3 +52,16 @@ jobs:
         with:
           name: test-reports
           path: "**/build/reports/tests/**"
+
+  backend-image:
+    # Vérifie que l'image Docker du backend (celle que Cloud Run construira) se construit correctement.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build backend Docker image
+        run: docker build -t waste-sorter-backend .
+      - name: Smoke test
+        run: |
+          docker run -d --name api -p 8080:8080 waste-sorter-backend
+          for i in $(seq 1 30); do curl -sf localhost:8080/api/v1/health && exit 0; sleep 2; done
+          docker logs api; exit 1

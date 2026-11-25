@@ -28,6 +28,7 @@
     <string name="camera_permission">Camera access is needed to photograph an item. You can also upload a photo or sort the item manually.</string>
     <string name="camera_grant">Allow camera</string>
     <string name="camera_capture">Take photo</string>
+    <string name="camera_open_settings">Open app settings</string>
     <string name="camera_error">The camera could not be started.</string>
 
     <!-- Preview -->

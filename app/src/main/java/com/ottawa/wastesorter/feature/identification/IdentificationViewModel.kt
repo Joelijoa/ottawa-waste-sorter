@@ -46,9 +46,13 @@ class IdentificationViewModel(private val container: AppContainer) : ViewModel()
     /** Clé de la dernière analyse réussie : évite de payer deux fois le même appel à l'IA. */
     private var lastRequestKey: String? = null
 
+    /** Entrée d'historique de la dernière analyse de la photo actuelle (remplacée si l'utilisateur précise le matériau). */
+    private var lastSavedId: Long? = null
+
     fun setPhoto(uri: Uri) {
         _state.value.photoUri?.let { if (it != uri) container.imageProcessor.deleteIfTemporary(it) }
         lastRequestKey = null
+        lastSavedId = null
         _state.update { it.copy(photoUri = uri, error = null) }
     }
 
@@ -56,6 +60,7 @@ class IdentificationViewModel(private val container: AppContainer) : ViewModel()
         job?.cancel()
         _state.value.photoUri?.let { container.imageProcessor.deleteIfTemporary(it) }
         lastRequestKey = null
+        lastSavedId = null
         _state.update { it.copy(photoUri = null, isLoading = false, error = null) }
     }
 
@@ -80,7 +85,11 @@ class IdentificationViewModel(private val container: AppContainer) : ViewModel()
                     null
                 }
                 val saved = outcome.copy(thumbnailPath = thumbnail)
-                withContext(Dispatchers.IO) { container.history.save(saved) }
+                withContext(Dispatchers.IO) {
+                    // Même photo analysée à nouveau (matériau précisé) : on remplace l'entrée au lieu de la dupliquer.
+                    lastSavedId?.let { container.history.delete(it) }
+                    lastSavedId = container.history.save(saved)
+                }
                 lastRequestKey = key
                 _state.update { it.copy(isLoading = false, outcome = saved, showResult = true) }
             } catch (e: CancellationException) {
@@ -102,8 +111,13 @@ class IdentificationViewModel(private val container: AppContainer) : ViewModel()
         }
     }
 
+    /** Résultat issu de l'historique : il ne correspond pas à la photo en cours, qui est donc abandonnée. */
     fun showOutcome(outcome: SortingOutcome) {
-        _state.update { it.copy(outcome = outcome, showResult = true) }
+        job?.cancel()
+        _state.value.photoUri?.let { container.imageProcessor.deleteIfTemporary(it) }
+        lastRequestKey = null
+        lastSavedId = null
+        _state.update { it.copy(photoUri = null, isLoading = false, error = null, outcome = outcome, showResult = true) }
     }
 
     fun onResultShown() = _state.update { it.copy(showResult = false) }

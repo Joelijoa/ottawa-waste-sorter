@@ -57,8 +57,7 @@ fun Application.module(config: AppConfig, identifier: ImageIdentifier?) {
         register(IDENTIFY_RATE_LIMIT) {
             rateLimiter(limit = config.rateLimitPerMinute, refillPeriod = 60.seconds)
             requestKey { call ->
-                call.request.header("X-Forwarded-For")?.substringBefore(',')?.trim()
-                    ?: call.request.origin.remoteHost
+                clientKey(call.request.header("X-Forwarded-For"), call.request.origin.remoteHost)
             }
         }
     }
@@ -80,3 +79,10 @@ fun Application.module(config: AppConfig, identifier: ImageIdentifier?) {
         apiRoutes(config, service)
     }
 }
+
+/**
+ * Clé de limitation de débit. Sur Cloud Run, le proxy de Google AJOUTE l'adresse réelle du client à la fin de
+ * X-Forwarded-For : les premières valeurs peuvent être inventées par le client, la dernière ne peut pas l'être.
+ */
+internal fun clientKey(forwardedFor: String?, remoteHost: String): String =
+    forwardedFor?.split(',')?.map { it.trim() }?.lastOrNull { it.isNotEmpty() } ?: remoteHost
