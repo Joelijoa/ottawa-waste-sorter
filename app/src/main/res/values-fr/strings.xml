@@ -82,6 +82,7 @@
     <string name="result_put_it">Mettez-le dans le</string>
     <string name="result_before">Avant de le jeter</string>
     <string name="result_why">À Ottawa, ce matériau (%1$s) va dans : %2$s.</string>
+    <string name="result_why_rule">À Ottawa, cette règle couvre : %1$s.</string>
     <string name="result_save">Enregistrer dans l\'historique</string>
     <string name="result_saved">Enregistré dans l\'historique</string>
     <string name="result_another">Identifier un autre objet</string>
@@ -143,6 +144,9 @@
     <string name="guide_desc_blue">Contenants et emballages : plastique, métal, verre, cartons et gobelets.</string>
     <string name="guide_desc_green">Restes alimentaires et papier souillé.</string>
     <string name="guide_garbage_examples">Couches et produits sanitaires · Vaisselle cassée et céramique</string>
+    <string name="guide_examples_black">Boîtes en carton · Boîtes de biscuits et de céréales · Boîtes de pizza propres · Journaux et circulaires · Sacs en papier</string>
+    <string name="guide_examples_blue">Contenants et pots en plastique · Pots en verre · Boîtes de conserve · Papier d\'aluminium · Gobelets et tubes spiralés · Plastique souple propre</string>
+    <string name="guide_examples_green">Épluchures · Restes de repas · Marc de café · Viande et os · Papier souillé</string>
     <string name="guide_garbage_general">Déchets ménagers non recyclables et non compostables. Ne confondez pas les ordures avec le bac noir de recyclage.</string>
     <string name="guide_schedule">Voir votre jour de collecte</string>
     <string name="guide_accepted">Accepté</string>

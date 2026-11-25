@@ -256,7 +256,11 @@ private fun BinCard(c: ComponentResult, language: String) {
 @Composable
 private fun whyText(c: ComponentResult, language: String): String {
     val notes = c.notes.joinToString(" ") { it.get(language) }
-    return notes.ifBlank {
+    if (notes.isNotBlank()) return notes
+    val rule = OttawaRules2026.rules.firstOrNull { it.id == c.ruleId }
+    return if (rule != null) {
+        stringResource(R.string.result_why_rule, rule.examples.get(language))
+    } else {
         stringResource(R.string.result_why, stringResource(c.material.label()), stringResource(c.destination.style().name))
     }
 }
@@ -295,10 +299,8 @@ private fun PartCard(n: Int, part: ComponentResult, language: String) {
             StepNumber(n, Ows.Charcoal, Color.White, size = 28.dp)
             Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 Text(part.componentName, style = OwsType.Body.copy(fontWeight = FontWeight.Bold), color = Ows.Charcoal)
-                Text(
-                    (listOf(detail) + part.instructions.map { it.get(language) }).joinToString(" "),
-                    style = OwsType.Meta, color = Ows.Secondary,
-                )
+                Text(detail, style = OwsType.Meta.copy(fontWeight = FontWeight.SemiBold), color = Ows.Secondary)
+                Text(part.instructions.joinToString(" ") { it.get(language) }, style = OwsType.Meta, color = Ows.Secondary)
             }
         }
         Row(

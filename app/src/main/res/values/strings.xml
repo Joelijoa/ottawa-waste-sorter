@@ -85,6 +85,7 @@
     <string name="result_put_it">Put it in the</string>
     <string name="result_before">Before you toss it</string>
     <string name="result_why">%1$s goes in Ottawa\'s %2$s.</string>
+    <string name="result_why_rule">In Ottawa, this rule covers: %1$s.</string>
     <string name="result_save">Save to History</string>
     <string name="result_saved">Saved to History</string>
     <string name="result_another">Identify another item</string>
@@ -146,6 +147,9 @@
     <string name="guide_desc_blue">Containers and packaging: plastic, metal, glass, cartons and cups.</string>
     <string name="guide_desc_green">Food scraps and food-soiled paper.</string>
     <string name="guide_garbage_examples">Diapers and sanitary products · Broken dishes and ceramics</string>
+    <string name="guide_examples_black">Cardboard boxes · Biscuit and cereal boxes · Clean pizza boxes · Newspapers and flyers · Paper bags</string>
+    <string name="guide_examples_blue">Plastic containers and tubs · Glass jars · Metal cans · Aluminum foil · Paper cups and spiral cans · Clean flexible plastic</string>
+    <string name="guide_examples_green">Fruit and vegetable scraps · Leftovers · Coffee grounds · Meat and bones · Food-soiled paper</string>
     <string name="guide_garbage_general">Household waste that can\'t be recycled or composted. Don\'t confuse the garbage with the black recycling bin.</string>
     <string name="guide_schedule">Check your collection day</string>
     <string name="guide_accepted">Accepted</string>

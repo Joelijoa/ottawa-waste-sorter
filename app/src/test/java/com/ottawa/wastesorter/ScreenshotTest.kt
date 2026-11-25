@@ -66,6 +66,9 @@ class ScreenshotTest {
             WasteSorterTheme { Box(Modifier.fillMaxSize().background(Ows.Background)) { content() } }
         }
         compose.waitForIdle()
+        // Laisse le temps à Room / DataStore d'émettre (requêtes hors du fil principal).
+        Thread.sleep(400)
+        compose.waitForIdle()
         // Dessin direct de la vue racine (le mode PixelCopy de Robolectric attend un rendu matériel).
         val bitmap = compose.activity.window.decorView.rootView.drawToBitmap()
         val dir = File(System.getProperty("screenshots.dir") ?: "build/screenshots").apply { mkdirs() }

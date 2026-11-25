@@ -9,7 +9,7 @@ import androidx.compose.material.icons.rounded.Checkroom
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Description
 import androidx.compose.material.icons.rounded.Eco
-import androidx.compose.material.icons.rounded.Inventory
+import androidx.compose.material.icons.rounded.Inventory2
 import androidx.compose.material.icons.rounded.Kitchen
 import androidx.compose.material.icons.rounded.Layers
 import androidx.compose.material.icons.rounded.LocalCafe
@@ -76,7 +76,7 @@ val CURBSIDE_BINS = listOf(Destination.GARBAGE, Destination.BLACK_BIN, Destinati
 data class ItemLook(val icon: ImageVector, val bg: Color, val fg: Color)
 
 fun Material.look(): ItemLook = when (this) {
-    Material.PAPERBOARD, Material.CORRUGATED_CARDBOARD -> ItemLook(Icons.Rounded.Inventory, Color(0xFFF3E8D8), Color(0xFF8A5A2B))
+    Material.PAPERBOARD, Material.CORRUGATED_CARDBOARD -> ItemLook(Icons.Rounded.Inventory2, Color(0xFFF3E8D8), Color(0xFF8A5A2B))
     Material.PAPER -> ItemLook(Icons.Rounded.Description, Color(0xFFEFE4D2), Color(0xFF8A5A2B))
     Material.PAPER_LAMINATE_CONTAINER -> ItemLook(Icons.Rounded.LocalCafe, Color(0xFFEFE7DF), Color(0xFF6B4A33))
     Material.PAPER_LAMINATE_PACKAGING -> ItemLook(Icons.Rounded.ShoppingBag, Color(0xFFEFE4D2), Color(0xFF8A5A2B))

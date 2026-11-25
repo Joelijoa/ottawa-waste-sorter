@@ -65,6 +65,15 @@ private fun descRes(bin: Destination): Int = when (bin) {
     else -> R.string.guide_desc_green
 }
 
+/** Exemples courts par bac (tous couverts par une règle vérifiée du jeu de règles). */
+@StringRes
+private fun examplesRes(bin: Destination): Int = when (bin) {
+    Destination.GARBAGE -> R.string.guide_garbage_examples
+    Destination.BLACK_BIN -> R.string.guide_examples_black
+    Destination.BLUE_BIN -> R.string.guide_examples_blue
+    else -> R.string.guide_examples_green
+}
+
 /** Écran 10 — Guide de tri : les quatre flux de collecte en bordure de rue. */
 @Composable
 fun GuideScreen(language: String, onOpenBin: (Destination) -> Unit, modifier: Modifier = Modifier) {
@@ -79,7 +88,6 @@ fun GuideScreen(language: String, onOpenBin: (Destination) -> Unit, modifier: Mo
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             CURBSIDE_BINS.forEach { bin ->
                 val s = bin.style()
-                val examples = rulesFor(bin).flatMap { it.examples.get(language).split(", ") }.distinct().take(5)
                 OwsCard(Modifier.fillMaxWidth(), radius = 24.dp, onClick = { onOpenBin(bin) }) {
                     Row(
                         Modifier.fillMaxWidth().background(s.bg).padding(16.dp),
@@ -97,11 +105,7 @@ fun GuideScreen(language: String, onOpenBin: (Destination) -> Unit, modifier: Mo
                     }
                     Column(Modifier.padding(start = 16.dp, end = 16.dp, top = 14.dp, bottom = 16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         Text(stringResource(descRes(bin)), style = OwsType.Meta.copy(fontSize = 14.sp, lineHeight = 20.sp), color = Ows.Charcoal)
-                        if (bin == Destination.GARBAGE) {
-                            Text(stringResource(R.string.guide_garbage_examples), style = OwsType.Meta, color = Ows.Secondary)
-                        } else {
-                            Text(examples.joinToString(" · "), style = OwsType.Meta, color = Ows.Secondary)
-                        }
+                        Text(stringResource(examplesRes(bin)), style = OwsType.Meta, color = Ows.Secondary)
                     }
                 }
             }
@@ -146,11 +150,12 @@ fun GuideDetailScreen(bin: Destination, language: String, onBack: () -> Unit) {
     val uri = LocalUriHandler.current
     val rules = rulesFor(bin)
     val accepted = rules.map { it.examples.get(language) }.distinct()
-    val prep = rules.flatMap { r -> r.instructions.map { it.get(language) } }.distinct().take(4)
+    // Les « consignes » des ordures sont des refus, pas une préparation : pas de bloc pour ce bac.
+    val prep = if (bin == Destination.GARBAGE) emptyList() else rules.flatMap { r -> r.instructions.map { it.get(language) } }.distinct().take(4)
 
-    Column(Modifier.fillMaxSize().background(s.bg).verticalScroll(rememberScrollState())) {
+    Column(Modifier.fillMaxSize().background(Ows.Background).verticalScroll(rememberScrollState())) {
         Column(
-            Modifier.fillMaxWidth().statusBarsPadding().padding(start = 16.dp, end = 16.dp, bottom = 40.dp),
+            Modifier.fillMaxWidth().background(s.bg).statusBarsPadding().padding(start = 16.dp, end = 16.dp, bottom = 40.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Box(Modifier.heightIn(min = 56.dp).offset(x = (-8).dp), contentAlignment = Alignment.CenterStart) { BackButton(onBack, tint = s.fg) }
