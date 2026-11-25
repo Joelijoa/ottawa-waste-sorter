@@ -46,6 +46,14 @@ android {
         generateLocaleConfig = true
     }
 
+    testOptions {
+        unitTests {
+            // Robolectric : ressources Android (polices, chaînes) disponibles dans les tests JVM.
+            isIncludeAndroidResources = true
+            all { it.systemProperty("screenshots.dir", "${layout.buildDirectory.get().asFile}/screenshots") }
+        }
+    }
+
     packaging {
         resources.excludes += setOf("/META-INF/{AL2.0,LGPL2.1}", "/META-INF/INDEX.LIST")
     }
@@ -97,6 +105,11 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
+    // Captures d'écran des écrans Compose sur la JVM (CI), sans émulateur.
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.junit)
+    testImplementation(platform(libs.androidx.compose.bom))
+    testImplementation(libs.androidx.compose.ui.test.junit4)
 
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.junit)

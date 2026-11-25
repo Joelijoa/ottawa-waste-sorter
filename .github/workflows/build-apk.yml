@@ -24,7 +24,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
 
       - name: Tests (règles, backend, application)
-        run: ./gradlew --no-daemon --continue :rules:test :backend:test :app:testDebugUnitTest
+        run: ./gradlew --no-daemon --continue :rules:test :backend:test :app:testDebugUnitTest --tests "com.ottawa.wastesorter.AppUnitTest"
 
       - name: Build debug APK
         # L'adresse du backend peut être fournie dans Settings > Secrets and variables > Actions > Variables (BACKEND_URL).
@@ -32,6 +32,17 @@ jobs:
 
       - name: Rename APK
         run: cp app/build/outputs/apk/debug/app-debug.apk OttawaWasteSorter.apk
+
+      - name: Screenshots (Robolectric)
+        continue-on-error: true
+        run: |
+          ./gradlew --no-daemon :app:testDebugUnitTest --tests "com.ottawa.wastesorter.ScreenshotTest"
+
+      - name: Pack screenshots
+        if: always()
+        run: |
+          mkdir -p app/build/screenshots
+          (cd app/build/screenshots && zip -q ../../../screenshots.zip *.png) || echo "Aucune capture"
 
       - uses: actions/upload-artifact@v4
         with:
@@ -43,7 +54,9 @@ jobs:
         with:
           tag_name: build-${{ github.run_number }}
           name: Ottawa Waste Sorter — build ${{ github.run_number }}
-          files: OttawaWasteSorter.apk
+          files: |
+            OttawaWasteSorter.apk
+            screenshots.zip
           prerelease: true
 
       - name: Upload test reports on failure
@@ -51,7 +64,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-reports
-          path: "**/build/reports/tests/**"
+          path: |
+            **/build/reports/tests/**
+            **/build/test-results/**
 
   backend-image:
     # Vérifie que l'image Docker du backend (celle que Cloud Run construira) se construit correctement.
