@@ -6,10 +6,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.asAndroidBitmap
-import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.captureToImage
-import androidx.compose.ui.test.onRoot
+import androidx.activity.ComponentActivity
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.core.view.drawToBitmap
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.ottawa.wastesorter.domain.model.ItemCatalog
@@ -49,7 +48,7 @@ import java.io.File
 class ScreenshotTest {
 
     @get:Rule
-    val compose = createComposeRule()
+    val compose = createAndroidComposeRule<ComponentActivity>()
 
     /** Robolectric n'a pas de réseau par défaut : on simule une connexion Internet (sinon l'accueil passe en mode hors ligne). */
     @Before
@@ -67,7 +66,8 @@ class ScreenshotTest {
             WasteSorterTheme { Box(Modifier.fillMaxSize().background(Ows.Background)) { content() } }
         }
         compose.waitForIdle()
-        val bitmap = compose.onRoot().captureToImage().asAndroidBitmap()
+        // Dessin direct de la vue racine (le mode PixelCopy de Robolectric attend un rendu matériel).
+        val bitmap = compose.activity.window.decorView.rootView.drawToBitmap()
         val dir = File(System.getProperty("screenshots.dir") ?: "build/screenshots").apply { mkdirs() }
         File(dir, "$name.png").outputStream().use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }
     }
