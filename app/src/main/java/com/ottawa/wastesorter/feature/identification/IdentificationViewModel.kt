@@ -48,11 +48,13 @@ class IdentificationViewModel(private val container: AppContainer) : ViewModel()
 
     /** Entrée d'historique de la dernière analyse de la photo actuelle (remplacée si l'utilisateur précise le matériau). */
     private var lastSavedId: Long? = null
+    private var lastAiOutcome: SortingOutcome? = null
 
     fun setPhoto(uri: Uri) {
         _state.value.photoUri?.let { if (it != uri) container.imageProcessor.deleteIfTemporary(it) }
         lastRequestKey = null
         lastSavedId = null
+        lastAiOutcome = null
         _state.update { it.copy(photoUri = uri, error = null) }
     }
 
@@ -61,6 +63,7 @@ class IdentificationViewModel(private val container: AppContainer) : ViewModel()
         _state.value.photoUri?.let { container.imageProcessor.deleteIfTemporary(it) }
         lastRequestKey = null
         lastSavedId = null
+        lastAiOutcome = null
         _state.update { it.copy(photoUri = null, isLoading = false, error = null) }
     }
 
@@ -69,8 +72,9 @@ class IdentificationViewModel(private val container: AppContainer) : ViewModel()
         val uri = _state.value.photoUri ?: return
         if (_state.value.isLoading) return
         val key = "$uri|$language|$material|$condition"
-        if (key == lastRequestKey && _state.value.outcome != null) {
-            _state.update { it.copy(showResult = true) }
+        val cached = lastAiOutcome
+        if (key == lastRequestKey && cached != null) {
+            _state.update { it.copy(outcome = cached, error = null, showResult = true) }
             return
         }
 
@@ -91,6 +95,7 @@ class IdentificationViewModel(private val container: AppContainer) : ViewModel()
                     lastSavedId = container.history.save(saved)
                 }
                 lastRequestKey = key
+                lastAiOutcome = saved
                 _state.update { it.copy(isLoading = false, outcome = saved, showResult = true) }
             } catch (e: CancellationException) {
                 throw e
@@ -117,6 +122,7 @@ class IdentificationViewModel(private val container: AppContainer) : ViewModel()
         _state.value.photoUri?.let { container.imageProcessor.deleteIfTemporary(it) }
         lastRequestKey = null
         lastSavedId = null
+        lastAiOutcome = null
         _state.update { it.copy(photoUri = null, isLoading = false, error = null, outcome = outcome, showResult = true) }
     }
 
