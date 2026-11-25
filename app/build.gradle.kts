@@ -24,6 +24,17 @@ android {
         buildConfigField("String", "DEFAULT_BACKEND_URL", "\"$backendUrl\"")
     }
 
+    signingConfigs {
+        // Clé de développement fixe, versionnée : tous les APK de test (CI ou local) ont la même signature,
+        // donc une nouvelle version s'installe par-dessus l'ancienne. Pour le Play Store, utiliser une clé privée.
+        getByName("debug") {
+            storeFile = file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false

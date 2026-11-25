@@ -10,3 +10,7 @@ local.properties
 *.jks
 backend/.env
 captures/
+
+# Clé de signature de DÉVELOPPEMENT (mot de passe public « android ») : permet d installer
+# chaque nouvel APK de test par-dessus le précédent. Ne jamais l utiliser pour le Play Store.
+!app/debug.keystore
