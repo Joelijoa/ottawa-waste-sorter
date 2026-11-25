@@ -24,7 +24,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
 
       - name: Tests (règles, backend, application)
-        run: ./gradlew --no-daemon :rules:test :backend:test :app:testDebugUnitTest
+        run: ./gradlew --no-daemon --continue :rules:test :backend:test :app:testDebugUnitTest
 
       - name: Build debug APK
         # L'adresse du backend peut être fournie dans Settings > Secrets and variables > Actions > Variables (BACKEND_URL).

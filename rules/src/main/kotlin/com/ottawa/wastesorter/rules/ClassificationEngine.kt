@@ -123,7 +123,10 @@ class ClassificationEngine(private val dataset: RulesDataset = OttawaRules2026.d
 
         /** Minuscules, sans accents, ponctuation remplacée par des espaces. */
         fun normalize(input: String): String =
-            Normalizer.normalize(input, Normalizer.Form.NFD)
+            Normalizer.normalize(
+                input.replace("œ", "oe").replace("Œ", "OE").replace("æ", "ae").replace("Æ", "AE"),
+                Normalizer.Form.NFD,
+            )
                 .replace(Regex("\\p{M}+"), "")
                 .lowercase()
                 .replace(Regex("[^a-z0-9]+"), " ")
