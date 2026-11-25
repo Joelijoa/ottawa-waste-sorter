@@ -47,12 +47,27 @@ class AppUnitTest {
     }
 
     @Test
+    fun catalogSearchFindsItemsInBothLanguages() {
+        assertEquals("pringles", com.ottawa.wastesorter.domain.model.ItemCatalog.search("croustilles").first().id)
+        assertEquals("yogurt", com.ottawa.wastesorter.domain.model.ItemCatalog.search("Yogourt").first().id)
+        org.junit.Assert.assertTrue(com.ottawa.wastesorter.domain.model.ItemCatalog.search("air fryer").isEmpty())
+    }
+
+    @Test
+    fun pringlesFromCatalogSplitsIntoBlueAndGreen() {
+        val item = com.ottawa.wastesorter.domain.model.ItemCatalog.byId("pringles")!!
+        val outcome = ClassifyManuallyUseCase(ClassificationEngine())(item.name.en, item.objectType, item.components("en"))
+        assertEquals(listOf(Destination.BLUE_BIN, Destination.BLUE_BIN, Destination.GREEN_BIN), outcome.classification.components.map { it.destination })
+    }
+
+    @Test
     fun everyEnumValueHasALabelAndAStyle() {
         Material.entries.forEach { assertNotEquals(0, it.label()) }
         Condition.entries.forEach { assertNotEquals(0, it.label()) }
         ObjectType.entries.forEach { assertNotEquals(0, it.label()) }
         // Les deux « noirs » ne doivent jamais se confondre.
-        assertNotEquals(Destination.BLACK_BIN.style().label, Destination.GARBAGE.style().label)
+        assertNotEquals(Destination.BLACK_BIN.style().name, Destination.GARBAGE.style().name)
+        assertNotEquals(Destination.BLACK_BIN.style().bg, Destination.GARBAGE.style().bg)
         assertNotEquals(Destination.BLACK_BIN.style().icon, Destination.GARBAGE.style().icon)
     }
 }

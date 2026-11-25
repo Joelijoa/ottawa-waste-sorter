@@ -1,152 +1,224 @@
 package com.ottawa.wastesorter.feature.guide
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExpandLess
-import androidx.compose.material.icons.filled.ExpandMore
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.ChevronRight
+import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.Event
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.ottawa.wastesorter.R
-import com.ottawa.wastesorter.rules.ClassificationEngine
 import com.ottawa.wastesorter.rules.Destination
 import com.ottawa.wastesorter.rules.OttawaRules2026
 import com.ottawa.wastesorter.rules.SortingRule
+import com.ottawa.wastesorter.ui.components.BackButton
+import com.ottawa.wastesorter.ui.components.OwsCard
+import com.ottawa.wastesorter.ui.components.ScreenTitle
+import com.ottawa.wastesorter.ui.components.StepNumber
+import com.ottawa.wastesorter.ui.theme.CURBSIDE_BINS
+import com.ottawa.wastesorter.ui.theme.Ows
+import com.ottawa.wastesorter.ui.theme.OwsType
 import com.ottawa.wastesorter.ui.theme.style
 
-private val GUIDE_ORDER = listOf(
-    Destination.GARBAGE,
-    Destination.BLACK_BIN,
-    Destination.BLUE_BIN,
-    Destination.GREEN_BIN,
-    Destination.SPECIAL_DROP_OFF,
-)
+private const val COLLECTION_CALENDAR = "https://ottawa.ca/CollectionCalendar"
 
-/** Guide de tri généré à partir du jeu de règles embarqué : fonctionne sans connexion. */
-@OptIn(ExperimentalMaterial3Api::class)
+/** Règles vérifiées d'un bac, issues du jeu de règles embarqué (fonctionne hors ligne). */
+private fun rulesFor(bin: Destination): List<SortingRule> =
+    OttawaRules2026.rules.filter { it.destination == bin && it.verified }
+
+@StringRes
+private fun descRes(bin: Destination): Int = when (bin) {
+    Destination.GARBAGE -> R.string.guide_desc_garbage
+    Destination.BLACK_BIN -> R.string.guide_desc_black
+    Destination.BLUE_BIN -> R.string.guide_desc_blue
+    else -> R.string.guide_desc_green
+}
+
+/** Écran 10 — Guide de tri : les quatre flux de collecte en bordure de rue. */
 @Composable
-fun GuideScreen(language: String, modifier: Modifier = Modifier) {
-    var query by rememberSaveable { mutableStateOf("") }
-    val q = ClassificationEngine.normalize(query)
-    val rulesByDestination = GUIDE_ORDER.associateWith { destination ->
-        OttawaRules2026.rules.filter { rule ->
-            rule.destination == destination &&
-                (q.isEmpty() || ClassificationEngine.normalize(rule.examples.en + " " + rule.examples.fr).contains(q))
+fun GuideScreen(language: String, onOpenBin: (Destination) -> Unit, modifier: Modifier = Modifier) {
+    Column(
+        modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 24.dp),
+        verticalArrangement = Arrangement.spacedBy(20.dp),
+    ) {
+        Column(Modifier.padding(top = 8.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            ScreenTitle(stringResource(R.string.guide_title))
+            Text(stringResource(R.string.guide_subtitle), style = OwsType.BodySmall, color = Ows.Secondary)
         }
-    }
-
-    Scaffold(
-        modifier = modifier,
-        topBar = { TopAppBar(title = { Text(stringResource(R.string.nav_guide)) }) },
-    ) { padding ->
-        LazyColumn(
-            Modifier.padding(padding).fillMaxSize().testTag("guide_list"),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-        ) {
-            item {
-                OutlinedTextField(
-                    value = query,
-                    onValueChange = { query = it },
-                    leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
-                    placeholder = { Text(stringResource(R.string.guide_search)) },
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth(),
-                )
-            }
-            item {
-                Text(
-                    stringResource(R.string.guide_intro),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            }
-            items(GUIDE_ORDER) { destination ->
-                val rules = rulesByDestination[destination].orEmpty()
-                if (q.isEmpty() || rules.isNotEmpty()) {
-                    DestinationCard(destination, rules, language, expandedInitially = q.isNotEmpty())
+        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            CURBSIDE_BINS.forEach { bin ->
+                val s = bin.style()
+                val examples = rulesFor(bin).flatMap { it.examples.get(language).split(", ") }.distinct().take(5)
+                OwsCard(Modifier.fillMaxWidth(), radius = 24.dp, onClick = { onOpenBin(bin) }) {
+                    Row(
+                        Modifier.fillMaxWidth().background(s.bg).padding(16.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(14.dp),
+                    ) {
+                        Box(Modifier.size(52.dp).clip(RoundedCornerShape(16.dp)).background(s.chip), contentAlignment = Alignment.Center) {
+                            Icon(s.icon, null, tint = s.fg, modifier = Modifier.size(30.dp))
+                        }
+                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                            Text(stringResource(s.name), style = OwsType.Section.copy(fontWeight = FontWeight.ExtraBold), color = s.fg)
+                            Text(stringResource(s.sub), style = OwsType.Meta.copy(fontSize = 14.sp), color = s.fg.copy(alpha = 0.9f))
+                        }
+                        Icon(Icons.Rounded.ChevronRight, null, tint = s.fg)
+                    }
+                    Column(Modifier.padding(start = 16.dp, end = 16.dp, top = 14.dp, bottom = 16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Text(stringResource(descRes(bin)), style = OwsType.Meta.copy(fontSize = 14.sp, lineHeight = 20.sp), color = Ows.Charcoal)
+                        if (bin == Destination.GARBAGE) {
+                            Text(stringResource(R.string.guide_garbage_examples), style = OwsType.Meta, color = Ows.Secondary)
+                        } else {
+                            Text(examples.joinToString(" · "), style = OwsType.Meta, color = Ows.Secondary)
+                        }
+                    }
                 }
             }
         }
+        Text(
+            stringResource(R.string.guide_footer), style = OwsType.Meta.copy(fontSize = 12.sp), color = Ows.Muted,
+            textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth(),
+        )
     }
 }
 
+/** Un « non accepté » : l'objet et où il va à la place. */
+private data class Rejected(@StringRes val what: Int, @StringRes val where: Int)
+
+private fun rejectedFor(bin: Destination): List<Rejected> = when (bin) {
+    Destination.GARBAGE -> listOf(
+        Rejected(R.string.rej_batteries, R.string.rej_where_depot),
+        Rejected(R.string.rej_chemicals, R.string.rej_where_hhw),
+        Rejected(R.string.rej_recyclables, R.string.rej_where_bins),
+    )
+    Destination.BLACK_BIN -> listOf(
+        Rejected(R.string.rej_cups_cans, R.string.rej_where_blue_2026),
+        Rejected(R.string.rej_soiled_paper, R.string.rej_where_green),
+        Rejected(R.string.rej_plastic_bags, R.string.rej_where_blue),
+        Rejected(R.string.rej_books, R.string.rej_where_donate),
+    )
+    Destination.BLUE_BIN -> listOf(
+        Rejected(R.string.rej_batteries, R.string.rej_where_depot),
+        Rejected(R.string.rej_aerosols, R.string.rej_where_hhw),
+        Rejected(R.string.rej_pots_ceramics, R.string.rej_where_not_recycling),
+    )
+    else -> listOf(
+        Rejected(R.string.rej_diapers, R.string.rej_where_garbage),
+        Rejected(R.string.rej_packaging, R.string.rej_where_blue_black),
+    )
+}
+
+/** Écrans 10b / 10c — détail d'un bac, en-tête pleine largeur à la couleur du bac. */
 @Composable
-private fun DestinationCard(destination: Destination, rules: List<SortingRule>, language: String, expandedInitially: Boolean) {
-    val style = destination.style()
-    var expanded by rememberSaveable(destination, expandedInitially) { mutableStateOf(expandedInitially) }
-    Card(onClick = { expanded = !expanded }, modifier = Modifier.fillMaxWidth()) {
-        Row(
-            Modifier.fillMaxWidth().background(style.color).padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
+fun GuideDetailScreen(bin: Destination, language: String, onBack: () -> Unit) {
+    val s = bin.style()
+    val uri = LocalUriHandler.current
+    val rules = rulesFor(bin)
+    val accepted = rules.map { it.examples.get(language) }.distinct()
+    val prep = rules.flatMap { r -> r.instructions.map { it.get(language) } }.distinct().take(4)
+
+    Column(Modifier.fillMaxSize().background(s.bg).verticalScroll(rememberScrollState())) {
+        Column(
+            Modifier.fillMaxWidth().statusBarsPadding().padding(start = 16.dp, end = 16.dp, bottom = 40.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            Box(
-                Modifier.size(44.dp).clip(CircleShape).background(style.onColor.copy(alpha = 0.18f)),
-                contentAlignment = Alignment.Center,
-            ) { Icon(style.icon, contentDescription = null, tint = style.onColor) }
-            Spacer(Modifier.size(12.dp))
-            Column(Modifier.weight(1f)) {
-                Text(stringResource(style.label), style = MaterialTheme.typography.titleMedium, color = style.onColor)
-                Text(stringResource(style.description), style = MaterialTheme.typography.bodySmall, color = style.onColor)
+            Box(Modifier.heightIn(min = 56.dp).offset(x = (-8).dp), contentAlignment = Alignment.CenterStart) { BackButton(onBack, tint = s.fg) }
+            Box(Modifier.size(64.dp).clip(RoundedCornerShape(20.dp)).background(s.chip), contentAlignment = Alignment.Center) {
+                Icon(s.icon, null, tint = s.fg, modifier = Modifier.size(38.dp))
             }
-            Icon(
-                if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
-                contentDescription = null,
-                tint = style.onColor,
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(stringResource(s.name), style = OwsType.ScreenTitle.copy(fontWeight = FontWeight.ExtraBold), color = s.fg)
+                Text(stringResource(s.sub), style = OwsType.Body, color = s.fg.copy(alpha = 0.9f))
+            }
+            Row(
+                Modifier.clip(RoundedCornerShape(10.dp)).clickable(role = Role.Button) { uri.openUri(COLLECTION_CALENDAR) }.padding(vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                Icon(Icons.Rounded.Event, null, tint = s.fg, modifier = Modifier.size(18.dp))
+                Text(
+                    stringResource(R.string.guide_schedule), color = s.fg.copy(alpha = 0.95f),
+                    style = OwsType.Meta.copy(fontSize = 14.sp, fontWeight = FontWeight.SemiBold, textDecoration = TextDecoration.Underline),
+                )
+            }
+        }
+        Column(
+            Modifier.fillMaxWidth().offset(y = (-24).dp).clip(RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp))
+                .background(Ows.Background).navigationBarsPadding().padding(start = 16.dp, end = 16.dp, top = 20.dp, bottom = 24.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            OwsCard(Modifier.fillMaxWidth(), padding = PaddingValues(16.dp)) {
+                Text(stringResource(R.string.guide_accepted), style = OwsType.Body.copy(fontWeight = FontWeight.Bold), color = Ows.Charcoal, modifier = Modifier.padding(bottom = 6.dp))
+                if (bin == Destination.GARBAGE) {
+                    Line(Icons.Rounded.Check, Ows.Green, stringResource(R.string.guide_garbage_general), null)
+                }
+                accepted.forEach { Line(Icons.Rounded.Check, Ows.Green, it, null) }
+            }
+            OwsCard(Modifier.fillMaxWidth(), padding = PaddingValues(16.dp)) {
+                Text(stringResource(R.string.guide_not_accepted), style = OwsType.Body.copy(fontWeight = FontWeight.Bold), color = Ows.Charcoal, modifier = Modifier.padding(bottom = 6.dp))
+                rejectedFor(bin).forEach { Line(Icons.Rounded.Close, Ows.Danger, stringResource(it.what), stringResource(it.where)) }
+            }
+            if (prep.isNotEmpty()) {
+                Column(
+                    Modifier.fillMaxWidth().clip(RoundedCornerShape(20.dp)).background(Ows.GreenSoft).padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp),
+                ) {
+                    Text(stringResource(R.string.guide_prepare), style = OwsType.Body.copy(fontWeight = FontWeight.Bold), color = Ows.GreenInk)
+                    prep.forEachIndexed { i, text ->
+                        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                            StepNumber(i + 1, Ows.Green, androidx.compose.ui.graphics.Color.White, size = 22.dp)
+                            Text(text, style = OwsType.Meta.copy(fontSize = 14.sp, lineHeight = 21.sp), color = Ows.GreenInk)
+                        }
+                    }
+                }
+            }
+            Text(
+                stringResource(R.string.guide_footer), style = OwsType.Meta.copy(fontSize = 12.sp), color = Ows.Muted,
+                textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth(),
             )
         }
-        if (expanded) {
-            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                if (destination == Destination.GARBAGE) {
-                    Text(stringResource(R.string.guide_garbage_general), style = MaterialTheme.typography.bodyMedium)
-                }
-                rules.forEachIndexed { index, rule ->
-                    if (index > 0) HorizontalDivider()
-                    Text(rule.examples.get(language), style = MaterialTheme.typography.titleSmall)
-                    rule.instructions.forEach { Text("• " + it.get(language), style = MaterialTheme.typography.bodySmall) }
-                    rule.restrictions.forEach {
-                        Text(it.get(language), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    }
-                    if (!rule.verified) {
-                        Text(
-                            stringResource(R.string.result_component_verify),
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.error,
-                        )
-                    }
-                }
-            }
+    }
+}
+
+@Composable
+private fun Line(icon: androidx.compose.ui.graphics.vector.ImageVector, tint: androidx.compose.ui.graphics.Color, text: String, sub: String?) {
+    Row(Modifier.padding(vertical = 4.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+        Icon(icon, null, tint = tint, modifier = Modifier.size(20.dp))
+        Column {
+            Text(text, style = OwsType.BodySmall, color = Ows.Charcoal)
+            if (sub != null) Text(sub, style = OwsType.Meta, color = Ows.Secondary)
         }
     }
 }
+

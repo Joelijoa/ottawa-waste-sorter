@@ -35,4 +35,5 @@ interface SettingsRepository {
     suspend fun current(): AppSettings
     suspend fun setBackendUrl(url: String)
     suspend fun setSaveThumbnails(enabled: Boolean)
+    suspend fun addRecentSearch(query: String)
 }

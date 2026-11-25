@@ -7,14 +7,14 @@
     android:viewportHeight="108">
     <!-- Couvercle -->
     <path
-        android:fillColor="#2E7D4F"
+        android:fillColor="#23845A"
         android:pathData="M36,38h36a3,3 0,0 1,3 3v2a1,1 0,0 1,-1 1H34a1,1 0,0 1,-1 -1v-2a3,3 0,0 1,3 -3z" />
     <path
-        android:fillColor="#2E7D4F"
+        android:fillColor="#23845A"
         android:pathData="M48,33h12a2,2 0,0 1,2 2v3H46v-3a2,2 0,0 1,2 -2z" />
     <!-- Cuve -->
     <path
-        android:fillColor="#2E7D4F"
+        android:fillColor="#23845A"
         android:pathData="M36,47h36l-3.5,28a4,4 0,0 1,-4 3.5H43.5a4,4 0,0 1,-4 -3.5z" />
     <!-- Feuille -->
     <path

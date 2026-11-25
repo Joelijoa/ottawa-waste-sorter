@@ -1,108 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Généré par tools/gen_strings.py : modifier ce script, pas ce fichier. -->
 <resources>
-    <!-- Navigation -->
     <string name="nav_home">Accueil</string>
     <string name="nav_history">Historique</string>
     <string name="nav_guide">Guide de tri</string>
     <string name="nav_settings">Réglages</string>
-
-    <!-- Actions -->
     <string name="action_back">Retour</string>
+    <string name="action_close">Fermer</string>
     <string name="action_cancel">Annuler</string>
     <string name="action_delete">Supprimer</string>
-    <string name="action_done">Terminé</string>
     <string name="action_retry">Réessayer</string>
     <string name="action_save">Enregistrer</string>
-
-    <!-- Accueil -->
-    <string name="home_tagline">Photographiez un objet, trouvez le bon bac à Ottawa.</string>
+    <string name="action_share">Partager</string>
+    <string name="action_clear">Effacer</string>
+    <string name="action_see_all">Tout voir</string>
+    <string name="action_manual_search">Recherche manuelle</string>
+    <string name="home_city">Ottawa</string>
+    <string name="home_title">Trions comme il faut.</string>
+    <string name="home_subtitle">Trouvez le bon bac pour chaque objet.</string>
+    <string name="home_card_title">Que voulez-vous jeter ?</string>
+    <string name="home_card_text">Prenez une photo et découvrez où il va.</string>
     <string name="home_take_photo">Prendre une photo</string>
-    <string name="home_upload_photo">Importer une photo</string>
-    <string name="home_manual">Trier manuellement</string>
-    <string name="home_guide">Guide de tri</string>
-    <string name="home_recent">Objets récents</string>
-
-    <!-- Caméra -->
-    <string name="camera_permission">L\'accès à la caméra est nécessaire pour photographier un objet. Vous pouvez aussi importer une photo ou trier l\'objet manuellement.</string>
+    <string name="home_needs_internet">Internet requis</string>
+    <string name="home_upload_photo">Importer depuis la galerie</string>
+    <string name="home_categories">Explorer les catégories</string>
+    <string name="home_recent">Identifiés récemment</string>
+    <string name="home_offline_title">Vous êtes hors ligne</string>
+    <string name="home_offline_text">L\'identification par photo nécessite Internet. La recherche et le guide de tri fonctionnent toujours avec les données enregistrées.</string>
+    <string name="camera_permission">L\'accès à la caméra est nécessaire pour photographier un objet. Vous pouvez aussi importer une photo ou rechercher l\'objet.</string>
     <string name="camera_grant">Autoriser la caméra</string>
-    <string name="camera_capture">Prendre la photo</string>
     <string name="camera_open_settings">Ouvrir les réglages de l\'appli</string>
     <string name="camera_error">Impossible de démarrer la caméra.</string>
-
-    <!-- Aperçu -->
-    <string name="preview_title">Vérifiez votre photo</string>
+    <string name="camera_hint">Placez l\'objet dans le cadre.</string>
+    <string name="camera_flash">Flash</string>
+    <string name="camera_flash_on">Activé</string>
+    <string name="camera_flash_off">Désactivé</string>
+    <string name="camera_switch">Changer de caméra</string>
+    <string name="preview_title">Est-ce la bonne photo ?</string>
+    <string name="preview_subtitle">Vérifiez que l\'emballage est bien visible.</string>
     <string name="preview_retake">Reprendre</string>
-    <string name="preview_identify">Identifier</string>
-    <string name="preview_analyzing">Identification en cours…</string>
-
-    <!-- Tri manuel -->
-    <string name="manual_title">Tri manuel</string>
-    <string name="manual_item_name">Nom de l\'objet (facultatif)</string>
-    <string name="manual_object_type">Type d\'objet</string>
-    <string name="manual_search">Rechercher un matériau ou un objet (ex. Pringles, yogourt)</string>
-    <string name="manual_part">Partie %1$d</string>
-    <string name="manual_material">Matériau</string>
-    <string name="manual_condition">État</string>
-    <string name="manual_no_match">Aucun matériau ne correspond à votre recherche.</string>
-    <string name="manual_add_part">Ajouter une autre partie</string>
-    <string name="manual_classify">Voir où le jeter</string>
-
-    <!-- Résultat -->
-    <string name="result_title">Où le jeter ?</string>
+    <string name="preview_continue">Continuer</string>
+    <string name="analyzing_title">Identification en cours...</string>
+    <string name="analyzing_text">Vérification des matériaux et des règles de tri d\'Ottawa.</string>
+    <string name="analyzing_step1">Reconnaissance de l\'objet</string>
+    <string name="analyzing_step2">Vérification des matériaux</string>
+    <string name="analyzing_step3">Application des règles d\'Ottawa</string>
+    <string name="slow_title">Cela prend plus de temps que d\'habitude</string>
+    <string name="slow_text">Votre connexion semble lente. Vous pouvez patienter ou rechercher l\'objet vous-même.</string>
+    <string name="slow_wait">Patienter</string>
+    <string name="slow_search">Chercher moi-même</string>
+    <string name="error_network_title">Impossible de joindre le service d\'identification.</string>
+    <string name="error_network">Vérifiez votre connexion et réessayez. Votre photo n\'a pas été perdue.</string>
+    <string name="error_not_configured_title">L\'identification par photo n\'est pas encore configurée.</string>
+    <string name="error_not_configured">Saisissez l\'adresse de votre serveur dans les Réglages, ou recherchez l\'objet manuellement.</string>
+    <string name="error_rate_limited_title">Trop de photos d\'affilée.</string>
+    <string name="error_rate_limited">Patientez une minute puis réessayez.</string>
+    <string name="error_invalid_image_title">Cette photo est illisible.</string>
+    <string name="error_invalid_image">Prenez une autre photo de l\'objet.</string>
+    <string name="error_ai_unavailable">Le service d\'identification est momentanément indisponible. Réessayez ou cherchez manuellement.</string>
+    <string name="error_server">Le serveur a renvoyé une erreur. Réessayez plus tard.</string>
+    <string name="unknown_title">Nous n\'avons pas pu identifier cet objet avec certitude.</string>
+    <string name="unknown_text">La photo est peut-être trop sombre ou l\'objet en partie caché.</string>
+    <string name="unknown_tips_title">Pour une meilleure photo</string>
+    <string name="unknown_tip_light">Utilisez une bonne lumière et évitez les ombres marquées.</string>
+    <string name="unknown_tip_label">Montrez l\'étiquette ou le symbole de recyclage.</string>
+    <string name="unknown_tip_one">Photographiez un seul objet à la fois.</string>
+    <string name="unknown_retake">Reprendre une photo</string>
+    <string name="unknown_manual">Choisir le matériau moi-même</string>
+    <string name="lowconf_title">Nous avons une piste, mais il nous manque une précision.</string>
+    <string name="lowconf_question">Est-il propre, ou taché d\'aliments ou de graisse ?</string>
+    <string name="lowconf_explain">Le papier et les emballages propres sont recyclés. Le papier souillé va au compost.</string>
+    <string name="lowconf_clean">Il est propre et sec</string>
+    <string name="lowconf_soiled">Il y a des aliments ou de la graisse</string>
+    <string name="lowconf_other">Choisir le matériau moi-même</string>
     <string name="result_none">Aucun résultat à afficher.</string>
-    <string name="result_method_ai_confidence">Identifié par l\'IA · confiance %1$d %%</string>
-    <string name="result_verify_notice">Une partie de ce résultat n\'a pas pu être vérifiée avec les règles officielles d\'Ottawa. Vérifiez avant de le jeter.</string>
-    <string name="result_component_verify">À vérifier : cette consigne n\'est pas confirmée par les sources officielles.</string>
-    <string name="result_source">Source officielle</string>
+    <string name="result_head_photo">Votre objet a été identifié</string>
+    <string name="result_head_history">Depuis votre historique</string>
+    <string name="result_head_manual">Voici où le jeter</string>
+    <string name="result_material">Matériau</string>
+    <string name="result_condition">État</string>
+    <string name="result_put_it">Mettez-le dans le</string>
+    <string name="result_before">Avant de le jeter</string>
+    <string name="result_why">À Ottawa, ce matériau (%1$s) va dans : %2$s.</string>
+    <string name="result_save">Enregistrer dans l\'historique</string>
+    <string name="result_saved">Enregistré dans l\'historique</string>
+    <string name="result_another">Identifier un autre objet</string>
+    <string name="result_footer">D\'après les règles du programme ontarien de recyclage, en vigueur à Ottawa depuis le 1er janvier 2026 (règles %1$s).</string>
+    <string name="result_verify_notice">Une partie de ce résultat n\'est pas confirmée par les sources officielles. Vérifiez avant de jeter l\'objet.</string>
     <string name="result_check_city">Vérifier sur ottawa.ca</string>
-    <string name="result_refine">Préciser le matériau</string>
-    <string name="result_rules_version">Règles : %1$s</string>
-    <string name="method_ai">Identifié par l\'IA</string>
-    <string name="method_manual">Trié manuellement</string>
-
-    <!-- Destinations -->
-    <string name="dest_blue">Bac bleu — contenants</string>
-    <string name="dest_blue_desc">Contenants en verre, métal, plastique, mousse et papier laminé</string>
-    <string name="dest_black">Bac noir — papier et fibres</string>
-    <string name="dest_black_desc">Papier, carton mince et carton propres</string>
-    <string name="dest_green">Bac vert — matières organiques</string>
-    <string name="dest_green_desc">Déchets alimentaires et papier souillé</string>
-    <string name="dest_garbage">Ordures (sac noir)</string>
-    <string name="dest_garbage_desc">Déchets ménagers non recyclables et non compostables</string>
+    <string name="verify_title">À vérifier</string>
+    <string name="multi_title">Votre emballage contient plusieurs matériaux.</string>
+    <string name="multi_text">Séparez-le en %1$d parties. Elles vont dans %2$d bacs différents.</string>
+    <string name="toast_saved">Enregistré dans votre historique</string>
+    <string name="toast_view">Voir</string>
+    <string name="share_footer">Trié avec Ottawa Waste Sorter</string>
+    <string name="conf_question">Quelle est la fiabilité de cette identification ?</string>
+    <string name="conf_high">Très probable</string>
+    <string name="conf_likely">Probable</string>
+    <string name="conf_possible">Possible</string>
+    <string name="conf_high_desc">La forme, l\'impression et le matériau sont bien visibles.</string>
+    <string name="conf_likely_desc">La plupart des détails correspondent, mais certains sont peu visibles.</string>
+    <string name="conf_possible_desc">Seuls quelques détails ont pu être vérifiés.</string>
+    <string name="conf_explain">Cela indique notre degré de certitude sur la nature de l\'objet. Ce n\'est pas une décision officielle : le bac vient des règles de tri publiées pour ce type d\'objet à Ottawa.</string>
+    <string name="conf_hint">Si le résultat semble faux, recherchez l\'objet ou choisissez son matériau vous-même.</string>
+    <string name="conf_search">Pas juste ? Chercher</string>
+    <string name="conf_ok">Compris</string>
+    <string name="search_placeholder_short">Rechercher un objet...</string>
+    <string name="search_placeholder">Que jetez-vous ?</string>
+    <string name="search_recent">Recherches récentes</string>
+    <string name="search_popular">Objets courants</string>
+    <string name="search_by_material">Par matériau</string>
+    <string name="search_results">Résultats</string>
+    <string name="search_none_title">Aucun objet correspondant.</string>
+    <string name="search_none_text">Dites-nous de quoi « %1$s » est fait et nous trouverons le bon bac.</string>
+    <string name="search_choose_material">Choisir le matériau</string>
+    <string name="search_take_photo">Prendre une photo plutôt</string>
+    <string name="details_subtitle">Deux précisions et nous trouvons le bon bac.</string>
+    <string name="details_material_q">De quoi est-il fait ?</string>
+    <string name="details_condition_q">Dans quel état est-il ?</string>
+    <string name="details_more">Autres matériaux</string>
+    <string name="details_less">Moins de matériaux</string>
+    <string name="details_find">Trouver le bon bac</string>
+    <string name="details_unnamed">Votre objet</string>
+    <string name="details_unidentified">Objet non identifié</string>
+    <string name="history_title">Votre historique de tri</string>
+    <string name="history_search">Rechercher dans l\'historique</string>
+    <string name="history_today">Aujourd\'hui</string>
+    <string name="history_yesterday">Hier</string>
+    <string name="history_earlier">Plus tôt</string>
+    <string name="history_no_match">Aucun objet correspondant.</string>
+    <string name="history_empty_title">Rien de trié pour l\'instant</string>
+    <string name="history_empty">Les objets que vous identifiez ou recherchez seront enregistrés ici pour les retrouver facilement.</string>
+    <string name="history_swipe_hint">Balayez un objet vers la gauche pour le supprimer.</string>
+    <string name="history_clear">Effacer l\'historique</string>
+    <string name="clear_title">Effacer votre historique ?</string>
+    <string name="clear_text">Cela supprime %1$d objets enregistrés sur ce téléphone. Action définitive.</string>
+    <string name="clear_confirm">Effacer</string>
+    <string name="guide_title">Guide de tri</string>
+    <string name="guide_subtitle">Ottawa collecte quatre flux en bordure de rue.</string>
+    <string name="guide_desc_garbage">Déchets ménagers qui ne se recyclent pas et ne se compostent pas.</string>
+    <string name="guide_desc_black">Papier, carton et emballages en carton mince.</string>
+    <string name="guide_desc_blue">Contenants et emballages : plastique, métal, verre, cartons et gobelets.</string>
+    <string name="guide_desc_green">Restes alimentaires et papier souillé.</string>
+    <string name="guide_garbage_examples">Couches et produits sanitaires · Vaisselle cassée et céramique</string>
+    <string name="guide_garbage_general">Déchets ménagers non recyclables et non compostables. Ne confondez pas les ordures avec le bac noir de recyclage.</string>
+    <string name="guide_schedule">Voir votre jour de collecte</string>
+    <string name="guide_accepted">Accepté</string>
+    <string name="guide_not_accepted">Refusé</string>
+    <string name="guide_prepare">Comment préparer</string>
+    <string name="guide_footer">Les règles des bacs bleu et noir suivent le programme provincial de l\'Ontario, en vigueur depuis le 1er janvier 2026.</string>
+    <string name="rej_batteries">Piles et appareils électroniques</string>
+    <string name="rej_chemicals">Peinture, propane, produits chimiques</string>
+    <string name="rej_recyclables">Matières recyclables et restes alimentaires</string>
+    <string name="rej_cups_cans">Gobelets en papier et tubes spiralés</string>
+    <string name="rej_soiled_paper">Papier souillé et boîtes de pizza grasses</string>
+    <string name="rej_plastic_bags">Sacs et sachets en plastique</string>
+    <string name="rej_books">Livres</string>
+    <string name="rej_aerosols">Aérosols avec symbole de danger</string>
+    <string name="rej_pots_ceramics">Casseroles, poêles et céramique</string>
+    <string name="rej_diapers">Couches et produits sanitaires</string>
+    <string name="rej_packaging">Emballages recyclables</string>
+    <string name="rej_where_depot">Dépôt de déchets dangereux ou point de reprise</string>
+    <string name="rej_where_hhw">Dépôt de déchets domestiques dangereux</string>
+    <string name="rej_where_bins">Utilisez le bac bleu, noir ou vert</string>
+    <string name="rej_where_blue_2026">Bac bleu (depuis janvier 2026)</string>
+    <string name="rej_where_green">Bac vert</string>
+    <string name="rej_where_blue">Bac bleu</string>
+    <string name="rej_where_donate">À donner s\'ils sont en bon état</string>
+    <string name="rej_where_not_recycling">Refusés au recyclage</string>
+    <string name="rej_where_garbage">Ordures</string>
+    <string name="rej_where_blue_black">Bac bleu ou bac noir</string>
+    <string name="dest_garbage">Ordures</string>
+    <string name="dest_garbage_desc">Déchets non recyclables</string>
+    <string name="dest_black">Bac noir de recyclage</string>
+    <string name="dest_black_desc">Papier et fibres</string>
+    <string name="dest_blue">Bac bleu de recyclage</string>
+    <string name="dest_blue_desc">Verre, métal et plastique</string>
+    <string name="dest_green">Bac vert</string>
+    <string name="dest_green_desc">Matières organiques</string>
     <string name="dest_special">Dépôt spécial</string>
-    <string name="dest_special_desc">Déchets dangereux, piles, dons</string>
+    <string name="dest_special_desc">Dépôt ou don</string>
     <string name="dest_verify">À vérifier</string>
-    <string name="dest_verify_desc">Aucune règle vérifiée : renseignez-vous auprès de la Ville</string>
-
-    <!-- Matériaux -->
+    <string name="dest_verify_desc">Aucune règle vérifiée</string>
     <string name="mat_paper">Papier</string>
-    <string name="mat_paperboard">Carton mince (boîte de biscuits, céréales)</string>
+    <string name="mat_paperboard">Carton</string>
     <string name="mat_corrugated">Carton ondulé</string>
-    <string name="mat_laminate_container">Gobelet en papier ou tube spiralé</string>
+    <string name="mat_laminate_container">Gobelet ou tube spiralé</string>
     <string name="mat_laminate_packaging">Sac en papier laminé</string>
     <string name="mat_carton">Carton de lait ou de jus</string>
-    <string name="mat_rigid_plastic">Plastique rigide</string>
-    <string name="mat_flexible_plastic">Plastique souple</string>
-    <string name="mat_foam">Mousse (polystyrène)</string>
+    <string name="mat_rigid_plastic">Plastique</string>
+    <string name="mat_flexible_plastic">Emballage souple</string>
+    <string name="mat_foam">Mousse</string>
     <string name="mat_metal">Métal</string>
     <string name="mat_foil">Papier d\'aluminium</string>
     <string name="mat_glass">Verre</string>
-    <string name="mat_food">Déchets alimentaires</string>
+    <string name="mat_food">Restes alimentaires</string>
     <string name="mat_ceramic">Céramique</string>
     <string name="mat_textile">Textile</string>
-    <string name="mat_hazardous">Dangereux (piles, peinture…)</string>
+    <string name="mat_hazardous">Dangereux (piles, peinture)</string>
     <string name="mat_mixed">Matériaux mélangés</string>
     <string name="mat_other">Autre</string>
     <string name="mat_unknown">Inconnu</string>
-
-    <!-- États -->
     <string name="cond_clean">Propre et vide</string>
+    <string name="cond_clean_hint">Plus d\'aliments ni de liquide</string>
     <string name="cond_dirty">Sale</string>
-    <string name="cond_food">Résidus alimentaires</string>
+    <string name="cond_dirty_hint">Taché ou poussiéreux</string>
+    <string name="cond_food">Restes d\'aliments</string>
+    <string name="cond_food_hint">Il reste des aliments ou de la graisse</string>
     <string name="cond_wet">Mouillé</string>
-    <string name="cond_unknown">Inconnu</string>
-
-    <!-- Types d'objets -->
+    <string name="cond_wet_hint">Humide ou trempé</string>
+    <string name="cond_unknown">Pas sûr</string>
+    <string name="cond_unknown_hint">Nous indiquerons ce qui change s\'il est souillé</string>
     <string name="type_food">Emballage alimentaire</string>
     <string name="type_beverage">Emballage de boisson</string>
     <string name="type_delivery">Emballage de livraison</string>
@@ -111,42 +219,33 @@
     <string name="type_printed">Papier imprimé</string>
     <string name="type_food_scraps">Restes alimentaires</string>
     <string name="type_other">Autre</string>
-
-    <!-- Historique -->
-    <string name="history_search">Rechercher dans l\'historique</string>
-    <string name="history_empty">Aucun objet pour l\'instant. Vos identifications apparaîtront ici.</string>
-    <string name="history_no_match">Aucun objet correspondant.</string>
-    <string name="history_clear">Effacer l\'historique</string>
-    <string name="history_clear_confirm">Supprimer tous les objets et miniatures enregistrés ? Cette action est définitive.</string>
-
-    <!-- Guide -->
-    <string name="guide_search">Rechercher un objet</string>
-    <string name="guide_intro">Collecte en bordure de rue à Ottawa, programme 2026. Le recyclage (bacs bleu et noir) est géré par Circular Materials ; la Ville gère le bac vert et les ordures.</string>
-    <string name="guide_garbage_general">Déchets ménagers qui ne peuvent être ni recyclés ni compostés. Ne confondez pas le sac noir d\'ordures avec le bac noir de recyclage.</string>
-
-    <!-- Erreurs -->
-    <string name="error_not_configured">L\'identification par photo n\'est pas encore configurée. Saisissez l\'adresse du serveur dans les Réglages, ou triez l\'objet manuellement.</string>
-    <string name="error_network">Pas de connexion au serveur. Vérifiez votre connexion Internet et réessayez, ou triez l\'objet manuellement.</string>
-    <string name="error_rate_limited">Trop de demandes. Patientez une minute puis réessayez.</string>
-    <string name="error_invalid_image">Cette image est illisible. Prenez une autre photo.</string>
-    <string name="error_ai_unavailable">Le service d\'identification est momentanément indisponible. Réessayez ou triez l\'objet manuellement.</string>
-    <string name="error_server">Le serveur a renvoyé une erreur. Réessayez plus tard.</string>
-
-    <!-- Réglages -->
+    <string name="settings_group_prefs">Préférences</string>
+    <string name="settings_group_identification">Identification par photo</string>
+    <string name="settings_group_data">Vos données</string>
     <string name="settings_language">Langue</string>
     <string name="settings_lang_system">Langue de l\'appareil</string>
+    <string name="settings_municipality">Municipalité</string>
+    <string name="settings_municipality_value">Ottawa, Ontario</string>
     <string name="settings_server">Serveur d\'identification</string>
-    <string name="settings_server_help">Adresse de votre backend Ottawa Waste Sorter (Google Cloud Run). Le guide de tri et le tri manuel fonctionnent sans lui.</string>
-    <string name="settings_server_url">Adresse du serveur</string>
-    <string name="settings_saved">Enregistré.</string>
-    <string name="settings_test">Tester la connexion</string>
+    <string name="settings_server_none">Non configuré</string>
+    <string name="settings_server_help">Adresse de votre backend Ottawa Waste Sorter (Google Cloud Run). La recherche et le guide de tri fonctionnent sans lui.</string>
+    <string name="settings_test">Tester</string>
+    <string name="settings_testing">Test en cours...</string>
     <string name="settings_test_ok">Connecté. Règles %1$s, IA prête.</string>
     <string name="settings_test_no_ai">Connecté (règles %1$s), mais la clé IA n\'est pas configurée sur le serveur.</string>
-    <string name="settings_thumbnails">Garder les miniatures dans l\'historique</string>
-    <string name="settings_thumbnails_help">Petites images stockées uniquement sur cet appareil.</string>
-    <string name="settings_privacy">Les photos sont compressées, envoyées au serveur pour analyse et ne sont pas conservées après traitement. Aucun compte n\'est requis.</string>
+    <string name="settings_privacy_title">Confidentialité</string>
+    <string name="settings_privacy_sub">Les photos sont analysées, pas conservées</string>
+    <string name="settings_privacy">Les photos sont compressées, envoyées à votre serveur pour analyse et ne sont pas conservées ensuite. Votre historique reste sur ce téléphone. Aucun compte n\'est nécessaire.</string>
+    <string name="settings_thumbnails">Garder les miniatures</string>
+    <string name="settings_thumbnails_help">Petites images enregistrées avec l\'historique, sur ce téléphone uniquement.</string>
+    <string name="settings_saved_count">%1$d objets enregistrés</string>
     <string name="settings_about">À propos</string>
+    <string name="settings_about_app">À propos d\'Ottawa Waste Sorter</string>
+    <string name="settings_about_sub">Règles de tri et sources</string>
     <string name="settings_about_text">Version %1$s · Règles %2$s. Suivez toujours les consignes officielles de la Ville d\'Ottawa et de Circular Materials.</string>
-    <string name="settings_src_city">Ville d\'Ottawa — Ordures et recyclage</string>
-    <string name="settings_src_circular">Circular Materials — Ottawa</string>
+    <string name="settings_version">Version</string>
+    <string name="settings_src_city">Ville d\'Ottawa : ordures et recyclage</string>
+    <string name="settings_src_circular">Circular Materials : Ottawa</string>
+    <string name="settings_src_guide">Guide de recyclage 2026 (PDF)</string>
+    <string name="settings_font_credit">Police Figtree, licence SIL Open Font License 1.1.</string>
 </resources>
